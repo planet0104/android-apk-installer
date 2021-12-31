@@ -24,7 +24,7 @@ adb push .\MyApp1.apk /storage/emulated/0
 3.不进行系统签名，重启系统，/system/app中的apk不会自动安装
 ```
 
-# 4. 进行系统签名
+# 4. APK系统签名
 
 在这里找到platform签名文件： http://androidxref.com/8.1.0_r33/xref/build/target/product/security/
 
