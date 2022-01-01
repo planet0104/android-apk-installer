@@ -26,6 +26,8 @@ adb push .\MyApp1.apk /storage/emulated/0
 
 # 4. APK系统签名
 
+> **注意：不同厂家系统源码的platform签名不一样，需要去各自的源码中下载对应的签名文件**
+
 在这里找到platform签名文件： http://androidxref.com/8.1.0_r33/xref/build/target/product/security/
 
 在这里找到 singapk.jar：http://androidxref.com/8.1.0_r33/xref/prebuilts/sdk/tools/lib/signapk.jar
@@ -45,6 +47,8 @@ signapk.jar
 
 在Linux系统中运行:
 ```powershell
+# 系统中需要java8版本，如果没有请安装
+# sudo apt-get install openjdk-8-jre-headless
 java -Djava.library.path=. -jar signapk.jar platform.x509.pem platform.pk8 APKInstaller.apk APKInstallerSigned.apk
 ```
 
@@ -69,6 +73,13 @@ pm install -i run.ccfish.android.apkinstaller -r /storage/emulated/0/MyApp1.apk
 # 启动安装好的程序
 ```powershell
 am start run.ccfish.android.myapp/.MainActivity
+```
+
+# 常用shell命令
+
+## 根据包名找到apk路径
+```shell
+adb shell pm list packages -f | grep 包名
 ```
 
 # TODO
