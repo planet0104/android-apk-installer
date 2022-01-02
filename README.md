@@ -14,7 +14,8 @@ adb push .\MyApp1.apk /storage/emulated/0
 
 # 3. 添加 android:sharedUserId="android.uid.system"
 
-**添加AndroidManifest.xml中的权限申请**
+> **添加AndroidManifest.xml中的权限申请**
+> 添加了android:sharedUserId="android.uid.system" 的程序，默认拥有外部存储读写权限
 
 ```powershell
 # 为什么要添加 android:sharedUserId="android.uid.system"
@@ -56,6 +57,9 @@ java -Djava.library.path=. -jar signapk.jar platform.x509.pem platform.pk8 APKIn
 
 # 将APKInstaller安装到 system/app
 
+> 用adb install APKInstallerSigned.apk，也可以静默安装apk，不必非得安装到system/app
+> system/app 中的程序无法卸载
+
 ```powershell
 adb root
 adb remount
@@ -63,11 +67,11 @@ adb push .\APKInstallerSigned.apk /system/app
 adb reboot
 ```
 
-# 此时启动APKInstaller，可执行pm install命令
+# 此时启动APKInstaller，可执行pm install命令, -r 是覆盖安装
 ```powershell
 pm install -i 调用者包名 -r APK路径
 #举例
-pm install -i run.ccfish.android.apkinstaller -r /storage/emulated/0/MyApp1.apk
+pm install -r -i run.ccfish.android.apkinstaller /storage/emulated/0/MyApp1.apk
 ```
 
 # 启动安装好的程序
@@ -75,16 +79,17 @@ pm install -i run.ccfish.android.apkinstaller -r /storage/emulated/0/MyApp1.apk
 am start run.ccfish.android.myapp/.MainActivity
 ```
 
+# 具有系统签名的APK静默升级方案
+
+1. 在storage根目录释放一个APKInstaller.apk
+2. 下载要安装的apk，保存至在storage跟目录下，命名为: app.apk
+3. 安装APKInstaller.apk
+4. 启动APKInstaller.apk
+5. APKInstaller启动后，安装App.apk，然后启动安装好的程序，然后关闭自己。
+
 # 常用shell命令
 
 ## 根据包名找到apk路径
 ```shell
 adb shell pm list packages -f | grep 包名
-```
-
-# TODO
-```
-1. 跟随系统启动，自动打开HTTP服务器
-2. API: 运行shell
-3. API: 设置开机运行指令
 ```

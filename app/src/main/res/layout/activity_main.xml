@@ -1,26 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:orientation="horizontal"
+    android:gravity="center"
     tools:context=".MainActivity">
 
-    <EditText
-        android:id="@+id/et_cmd"
-        android:text="pm install -i run.ccfish.android.myapp /storage/emulated/0/MyAppSigned.apk"
-        android:hint="输入cmd"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/tv_tip"
+        android:textSize="30sp"
+        android:text="@string/tip_install"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-    <Button
-        android:id="@+id/btn_install"
-        android:text="执行CMD"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <Button
-        android:id="@+id/btn_start"
-        android:text="开始安装"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+    <ProgressBar
+        android:layout_marginLeft="5sp"
+        android:layout_width="28sp"
+        android:layout_height="28sp" />
 </LinearLayout>

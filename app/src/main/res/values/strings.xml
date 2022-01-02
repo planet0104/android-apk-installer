@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">APKInstaller</string>
+    <string name="tip_install">正在安装</string>
 </resources>

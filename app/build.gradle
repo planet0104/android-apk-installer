@@ -4,7 +4,7 @@ plugins {
 
 android {
     compileSdk 30
-
+    project.archivesBaseName = "APKInstaller"
     defaultConfig {
         applicationId "run.ccfish.android.apkinstaller"
         minSdk 24
